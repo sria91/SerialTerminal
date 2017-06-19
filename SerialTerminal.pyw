@@ -8,10 +8,6 @@ from collections import OrderedDict
 import sys
 import yaml
 
-systemFixedFont = qg.QFontDatabase.systemFont(qg.QFontDatabase.FixedFont)
-fixedFont = qg.QFont('Consolas')
-
-
 class SerialTerminalWidget(qw.QWidget):
     baudrates = OrderedDict([
         ('1200'   , qsp.QSerialPort.Baud1200),
@@ -103,7 +99,7 @@ class SerialTerminalWidget(qw.QWidget):
 
         self.qtb_receiver = qw.QTextBrowser()
         self.qtb_receiver.setWordWrapMode(qg.QTextOption.NoWrap)
-        self.qtb_receiver.setFont(fixedFont)
+        self.qtb_receiver.setFont(fixedWidthFont)
         self.qtb_receiver.setMinimumWidth(400)
         self.qglt.addWidget(self.qtb_receiver, 0, 1)
 
@@ -129,7 +125,7 @@ class SerialTerminalWidget(qw.QWidget):
         self.qglt.addLayout(self.qhlt_receiver, 1, 1)
 
         self.qtb_sender = qw.QTextBrowser()
-        self.qtb_sender.setFont(fixedFont)
+        self.qtb_sender.setFont(fixedWidthFont)
         self.qtb_sender.setFixedHeight(100)
         self.qglt.addWidget(self.qtb_sender, 2, 1)
 
@@ -373,6 +369,9 @@ class SerialTerminal(qw.QMainWindow):
 
 
 app = qw.QApplication(sys.argv)
+fixedWidthFont = qg.QFont('Consolas')
+if not fixedWidthFont.exactMatch():
+    fixedWidthFont = qg.QFontDatabase.systemFont(qg.QFontDatabase.FixedFont)
 widget = SerialTerminal()
 widget.show()
 # widget.showMaximized()
