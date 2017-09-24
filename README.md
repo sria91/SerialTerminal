@@ -13,5 +13,5 @@ A simple Serial Terminal application written in PyQt
 ```sh
 $ git clone https://github.com/sria91/SerialTerminal.git
 $ cd SerialTerminal
-$ ./SerialTerminal.pyw
+$ ./serial_terminal.pyw
 ```
